@@ -129,6 +129,12 @@ fun Module.findImplementedModule(modelsProvider: IdeModifiableModelsProvider): M
     return implementedModuleName?.let { modelsProvider.findIdeModule(it) }
 }
 
+fun Module.findImplementingModules(modelsProvider: IdeModifiableModelsProvider): List<Module> {
+    return modelsProvider.modules.filter { module ->
+        module.findImplementedModuleName(modelsProvider) == name
+    }
+}
+
 interface ModuleSourceInfo : IdeaModuleInfo, TrackableModuleInfo {
     val module: Module
 
